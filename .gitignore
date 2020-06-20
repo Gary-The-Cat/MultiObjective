@@ -3,3 +3,5 @@ Simulation/.vs/
 Simulation/obj/
 Simulation/bin/
 packages/
+Game.Tests/obj/
+Game.Tests/bin/

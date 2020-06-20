@@ -27,6 +27,9 @@ namespace Game
         // Quit Key
         public static Keyboard.Key QuitKey => Keyboard.Key.Q;
 
+        // Pareto Visulisation Key
+        public static Keyboard.Key ParetoVisualisationKey => Keyboard.Key.Space;
+
         // Camera Controls
         public static Key PanLeft => Key.A;
 
@@ -47,6 +50,8 @@ namespace Game
         // Screen Size / Layouts
         public static FloatRect SinglePlayer => new FloatRect(0, 0, 1, 1);
 
+        public static FloatRect SinglePlayerCentered => new FloatRect(0.25f, 0.25f, 0.5f, 0.5f);
+
         public static FloatRect TwoPlayerLeft => new FloatRect(0, 0, 0.5f, 1);
 
         public static FloatRect TwoPlayerRight => new FloatRect(0.5f, 0, 0.5f, 1);
@@ -63,7 +68,7 @@ namespace Game
         public static bool UseRandomTowns => false;
 
         // NOTE: TownCount only applies when using random towns.
-        public static int RandomTownCount => 50;
+        public static int RandomTownCount => 30;
 
         public static int TownCount => UseRandomTowns ? RandomTownCount : TownHelper.TownPositions.Count;
     }

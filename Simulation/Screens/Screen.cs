@@ -14,6 +14,8 @@ namespace Game.Screens
 
         public bool IsUpdate { get; set; }
 
+        public bool IsUpdateCamera { get; set; }
+
         public bool IsDraw { get; set; }
 
         internal RenderWindow window;
@@ -25,6 +27,7 @@ namespace Game.Screens
             Camera = new Camera(configuration);
 
             IsUpdate = true;
+            IsUpdateCamera = true;
             IsDraw = true;
         }
 
@@ -51,6 +54,12 @@ namespace Game.Screens
         {
             IsUpdate = true;
             IsDraw = true;
+        }
+
+        public void SetActiveState(bool isActive)
+        {
+            IsUpdate = isActive;
+            IsDraw = isActive;
         }
 
         public void SetUpdateInactive()

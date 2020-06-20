@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit.3.12.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -114,11 +115,16 @@
     <Compile Include="GeneticAlgorithm\GAConfig.cs" />
     <Compile Include="GeneticAlgorithm\Individual.cs" />
     <Compile Include="GeneticAlgorithm\World.cs" />
+    <Compile Include="Helpers\KeyboardHelper.cs" />
+    <Compile Include="Helpers\MultiObjectiveHelper.cs" />
     <Compile Include="Helpers\SFMLGraphicsHelper.cs" />
     <Compile Include="Helpers\TownHelper.cs" />
+    <Compile Include="Helpers\WorldHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\ParetoVisualScreen.cs" />
     <Compile Include="Screens\Screen.cs" />
+    <Compile Include="Screens\ScreenManager.cs" />
     <Compile Include="Screens\SimulationScreen.cs" />
     <Compile Include="Text\FontText.cs" />
   </ItemGroup>
@@ -157,6 +163,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+    <Error Condition="!Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.12.0\build\NUnit.props'))" />
   </Target>
   <PropertyGroup>
     <PostBuildEvent>copy "$(ProjectDir)Resources\*" "$(ProjectDir)$(OutDir)"

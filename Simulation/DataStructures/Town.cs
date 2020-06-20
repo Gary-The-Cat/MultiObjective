@@ -22,10 +22,5 @@ namespace Game.DataStructures
         public Vector2f Position { get; set; }
 
         public RectangleShape Shape { get; set; }
-
-        public void Draw(RenderWindow window)
-        {
-            window.Draw(Shape);
-        }
     }
 }
