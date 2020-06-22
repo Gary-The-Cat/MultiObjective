@@ -26,7 +26,16 @@ namespace Game.Screens
 
         private FontText quitString;
 
-        public FontText GenerationString { get; private set; }
+        private object pathLock = new object();
+
+        private object distanceStringLock = new object();
+
+        private FontText generationString;
+        public FontText GenerationString 
+        {
+            get => generationString;
+            set => generationString = value;
+        }
 
         public SimulationScreen(
             RenderWindow window,
@@ -59,14 +68,20 @@ namespace Game.Screens
         public void UpdateSequence(Individual individual)
         {
             // Convert our sequence of ints to the 2D line representations to be drawn on the screen.
-            pathLines.Clear();
-            pathLines.AddRange(TownHelper.GetTownSequencePath(individual.Sequence));
+            lock (pathLock)
+            {
+                pathLines.Clear();
+                pathLines.AddRange(TownHelper.GetTownSequencePath(individual.Sequence));
+            }
 
             // Convert the fitness into a format that is easily digestable and update the value on screen
             // Format: 1234.56
-            totalDistanceString.StringText = 
-                $"Distance: {individual.DistanceFitness:#.##}\t\t" +
-                $"Time: {individual.TimeFitness:#.##}";
+            lock (distanceStringLock)
+            {
+                totalDistanceString.StringText =
+                    $"Distance: {individual.DistanceFitness:#.##}\t\t" +
+                    $"Time: {individual.TimeFitness:#.##}";
+            }
         }
 
         /// <summary>
@@ -83,14 +98,20 @@ namespace Game.Screens
         /// </summary>
         public override void Draw(float deltaT)
         {
-            // Draw each of the line segment for the path we are currently displaying
-            pathLines.ForEach(p => window.Draw(p));
-
             // Draw all of our towns
             townVisuals.ForEach(t => window.Draw(t));
 
+            // Draw each of the line segment for the path we are currently displaying
+            lock (pathLock)
+            {
+                pathLines.ForEach(p => window.Draw(p));
+            }
+
             // Draw the updated distance to the screen
-            window.DrawString(totalDistanceString, totalDistanceStringPosition);
+            lock (distanceStringLock)
+            {
+                window.DrawString(totalDistanceString, totalDistanceStringPosition);
+            }
 
             // Display the current generation
             window.DrawString(GenerationString, generationStringPosition, false);

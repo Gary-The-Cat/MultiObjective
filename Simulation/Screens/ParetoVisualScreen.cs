@@ -64,9 +64,9 @@ namespace Game.Screens
         public override void Update(float deltaT)
         {
             // Normalized fitness values causes our least fit individual in the population to 
-            // have a fittness of 1. But our most fir individual could have a value of anywhere
+            // have a fittness of 1. But our most fit individual could have a value of anywhere
             // between 0 -> 1. So we need to stretch our normalized fitness values over the
-            // range 0-> for visualisaiton purposes. This means our most fit individual will
+            // range 0 -> 1 for visualisaiton purposes. This means our most fit individual will
             // always be 0 on their respective axis.
             // Time
             var minTime = population.Min(i => i.NormalizedTimeFitness);
@@ -93,7 +93,7 @@ namespace Game.Screens
                 var y = -(individual.NormalizedDistanceFitness - minDistance) / diffdistance * graphSize.Y;
                 visual.Position = new Vector2f(x, y) + zeroOffset;
 
-                // Get the intensirt of the colour value & update it.
+                // Get the intensity of the colour value & update it.
                 var intensity = individual.Rank * step;
                 visual.FillColor = new Color((byte)intensity, 0, (byte)(255 -intensity));
             }

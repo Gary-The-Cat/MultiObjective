@@ -16,7 +16,7 @@ namespace Game.Tests
             MultiObjectiveHelper.UpdatePopulationFitness(population);
 
             Assert.AreEqual(population[0].Rank, 1);
-            Assert.AreEqual(population[1].Rank, 999);
+            Assert.AreEqual(population[1].Rank, 1);
             Assert.AreEqual(population[2].Rank, 1);
 
             Assert.AreEqual(population[3].Rank, 2);

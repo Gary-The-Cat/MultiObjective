@@ -12,6 +12,7 @@ namespace Game.Helpers
         private const int PathOffsetFromTown = 180;
         private const int MinimumSpeedInPixels = 10;
         private const int MaximumSpeedInPixels = 100;
+        private const int SpeedRangeInPixels = MaximumSpeedInPixels - MinimumSpeedInPixels;
         private static Random random = new Random();
 
         /// <summary>
@@ -59,7 +60,6 @@ namespace Game.Helpers
         {
             var localRandom = new Random(17);
             PathSpeedLimits = new Dictionary<(int, int), float>();
-            var range = MaximumSpeedInPixels - MinimumSpeedInPixels;
 
             for (int fromTown = 0; fromTown < Configuration.TownCount; fromTown++)
             {
@@ -71,7 +71,9 @@ namespace Game.Helpers
                     }
 
                     var pathDistance = TownPositions[toTown].Distance(TownPositions[fromTown]);
-                    PathSpeedLimits.Add((fromTown, toTown), (float)(MinimumSpeedInPixels + range * localRandom.NextDouble() * pathDistance / 1000));
+                    PathSpeedLimits.Add(
+                        (fromTown, toTown), 
+                        (float)(MinimumSpeedInPixels + SpeedRangeInPixels * localRandom.NextDouble() * pathDistance / 1000));
                 }
             }
         }
